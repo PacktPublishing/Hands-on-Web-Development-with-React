@@ -1,0 +1,8 @@
+.counter-box {
+  font-size: 3em;
+  padding: 1em;
+}
+
+.counter-box--danger {
+  color: crimson;
+}
