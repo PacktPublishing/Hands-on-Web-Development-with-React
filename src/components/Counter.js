@@ -20,6 +20,7 @@ export default class Counter extends React.Component {
 
   render() {
     const { counter } = this.state;
+    const { name } = this.props;
     return(
       <div className="counter-box">
         <button
@@ -28,7 +29,7 @@ export default class Counter extends React.Component {
           +1
         </button>
         <span className={counter < 0 ? 'counter-box--danger' : ''}>
-          {counter}
+          {name} {counter}
         </span>
         <button
           onClick={this.decrement}
