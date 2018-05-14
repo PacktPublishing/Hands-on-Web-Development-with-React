@@ -7,15 +7,31 @@ import './App.css';
 import JobCreationForm from './components/JobCreationForm';
 
 class App extends Component {
+  state = { isFormVisible: true };
+
+  toggleFormVisible = () => {
+    this.setState({
+      isFormVisible: !this.state.isFormVisible,
+    })
+  };
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">
-            Forms, Inputs, and Handling Events
+            Understanding Local State in React
           </h1>
         </header>
-        <JobCreationForm />
+        <button onClick={this.toggleFormVisible}>
+          {this.state.isFormVisible ?
+            'Hide form' :
+            'Show form'
+          }
+        </button>
+        <div style={{ visibility: this.state.isFormVisible ? 'visible' : 'hidden' }}>
+          <JobCreationForm/>
+        </div>
         {/*<List items={jobs} itemElement={JobItem} />*/}
       </div>
     );

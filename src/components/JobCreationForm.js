@@ -11,48 +11,69 @@ const locationOptions = [
   {value: 'Austin', label: 'Austin' },
   {value: 'Tokyo', label: 'Tokyo' },
   {value: 'Barcelona', label: 'Barcelona' },
-  {value: 'Wooho!', label: 'Another option' },
   {value: 'Other', label: 'Other' },
 ];
 
+const initialState = {
+  title: '',
+  company: '',
+  salary: '',
+  isRemoteFriendly: false,
+  location: '',
+};
+
 export default class JobCreationForm extends React.Component {
-  handleChange(e) {
+  state = initialState;
+
+  handleChange = (e) => {
     const { type, name, value, checked } = e.target;
     if (type === 'checkbox') {
-      console.log(name, ' ==> ', checked);
+      this.setState({ [name]: checked });
     } else {
-      console.log(name, ' ==> ', value);
+      this.setState({ [name]: value });
     }
-  }
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state);
+  };
+
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <TextInputField
           name="title"
           label="Title"
           onChange={this.handleChange}
+          value={this.state.title}
         />
         <TextInputField
           name="company"
           label="Company"
           onChange={this.handleChange}
+          value={this.state.company}
         />
         <TextInputField
           name="salary"
           label="Salary"
           onChange={this.handleChange}
+          value={this.state.salary}
         />
         <CheckboxField
           name="isRemoteFriendly"
           label="Remote friendly?"
           onChange={this.handleChange}
+          value={this.state.isRemoteFriendly}
         />
         <SelectField
           name="location"
           label="Location"
           options={locationOptions}
           onChange={this.handleChange}
+          value={this.state.location}
         />
+        <button>Submit Job</button>
       </form>
     );
   }

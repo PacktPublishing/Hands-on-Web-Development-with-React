@@ -3,7 +3,7 @@ import './InputField.css';
 
 export default class SelectField extends React.Component {
   render() {
-    const { label, name, options, onChange } = this.props;
+    const { label, name, options, onChange, value } = this.props;
     return (
       <div className="input-field">
         <label
@@ -17,6 +17,7 @@ export default class SelectField extends React.Component {
           name={name}
           id={name}
           onChange={onChange}
+          value={value}
         >
           {options.map(option =>
             <option
