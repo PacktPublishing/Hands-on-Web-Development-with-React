@@ -2,6 +2,7 @@ import React from 'react';
 import TextInputField from './form-elements/TextInputField';
 import CheckboxField from './form-elements/CheckboxField';
 import SelectField from './form-elements/SelectField';
+import './JobCreationForm.css';
 
 const locationOptions = [
   {value: '', label: 'Blank' },
@@ -22,6 +23,11 @@ const initialState = {
   location: '',
 };
 
+const isFormDataValid = (state) =>
+  state.title.length >= 10 &&
+  state.company.length > 0 &&
+  state.salary.length > 0;
+
 export default class JobCreationForm extends React.Component {
   state = initialState;
 
@@ -32,6 +38,9 @@ export default class JobCreationForm extends React.Component {
     } else {
       this.setState({ [name]: value });
     }
+    if (name === 'title' && value.length >= 10) {
+      this.setState({ titleError: false });
+    }
   };
 
   handleSubmit = (e) => {
@@ -39,26 +48,48 @@ export default class JobCreationForm extends React.Component {
     console.log(this.state);
   };
 
+
+  handleBlur = (e) => {
+    const { name } = e.target;
+    if (name === 'title') {
+      this.setState({ titleError: this.state.title.length < 10 });
+    }
+  };
+
   render() {
+    const enabled = isFormDataValid(this.state);
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form
+        className="job-form"
+        onSubmit={this.handleSubmit}
+      >
         <TextInputField
           name="title"
           label="Title"
           onChange={this.handleChange}
           value={this.state.title}
+          required={true}
+          onBlur={this.handleBlur}
         />
+        {this.state.titleError ?
+          <p className="job-form__error-label">
+            Should be at least 10 characters long.
+          </p> :
+          null
+        }
         <TextInputField
           name="company"
           label="Company"
           onChange={this.handleChange}
           value={this.state.company}
+          required={true}
         />
         <TextInputField
           name="salary"
           label="Salary"
           onChange={this.handleChange}
           value={this.state.salary}
+          required={true}
         />
         <CheckboxField
           name="isRemoteFriendly"
@@ -73,7 +104,12 @@ export default class JobCreationForm extends React.Component {
           onChange={this.handleChange}
           value={this.state.location}
         />
-        <button>Submit Job</button>
+        <button
+          className="job-form__button"
+          disabled={!enabled}
+        >
+          Submit Job
+        </button>
       </form>
     );
   }
