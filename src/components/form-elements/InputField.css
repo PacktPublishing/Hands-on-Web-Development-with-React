@@ -1,0 +1,27 @@
+.input-field {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.input-field__label {
+  flex: 1;
+}
+
+.input-field__text-input {
+  flex: 1;
+  padding: 12px;
+  font-size: 1.2em;
+}
+
+.checkbox-field {
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  font-weight: 700;
+  width: 100%;
+  margin-bottom: 12px;
+}
