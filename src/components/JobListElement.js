@@ -10,7 +10,7 @@ export default class JobListElement extends Component {
           <h2 className="job-item_title">
             {title}
           </h2>
-          <p class="job_info">
+          <p className="job_info">
             🏢{company} | 🌍{location} | 💰{salary}
           </p>
         </div>

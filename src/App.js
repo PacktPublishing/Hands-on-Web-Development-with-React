@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
 import './App.css';
-// import List from './components/List';
-// import JobItem from './components/JobListElement';
-// import SimpleJobElement from './components/SimpleJobElement';
-// import jobs from './data/jobs';
+import List from './components/List';
+import JobItem from './components/JobListElement';
 import JobCreationForm from './components/JobCreationForm';
+import Timer from './components/Timer';
+import ResizeDemo from './components/ResizeDemo';
+
+import JobsAPI from './api/JobsAPI';
 
 class App extends Component {
-  state = { isFormVisible: true };
+  state = {
+    jobs: [],
+    isFormVisible: false,
+    loading: false,
+  };
+
+  componentDidMount = async () => {
+    this.setState({ loading: true });
+    const jobs = await JobsAPI.getJobs();
+    this.setState({ jobs, loading: false });
+  };
 
   toggleFormVisible = () => {
     this.setState({
@@ -20,19 +32,21 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">
-            Validating User Input
+            Understanding Lifecycle Methods by Example
           </h1>
         </header>
+        <ResizeDemo />
+        <Timer />
         <button onClick={this.toggleFormVisible}>
           {this.state.isFormVisible ?
             'Hide form' :
             'Show form'
           }
         </button>
-        <div style={{ visibility: this.state.isFormVisible ? 'visible' : 'hidden' }}>
+        <div style={{ display: this.state.isFormVisible ? 'block' : 'none' }}>
           <JobCreationForm/>
         </div>
-        {/*<List items={jobs} itemElement={JobItem} />*/}
+        <List items={this.state.jobs} itemElement={JobItem} />
       </div>
     );
   }
