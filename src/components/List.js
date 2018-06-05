@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class JobListElement extends Component {
+export default class List extends Component {
   render() {
     const { items, itemElement: Item } = this.props;
     return (

@@ -2,6 +2,7 @@ import React from 'react';
 import TextInputField from './form-elements/TextInputField';
 import CheckboxField from './form-elements/CheckboxField';
 import SelectField from './form-elements/SelectField';
+import ConsentInput from './form-elements/ConsentInput';
 import './JobCreationForm.css';
 
 const locationOptions = [
@@ -21,12 +22,15 @@ const initialState = {
   salary: '',
   isRemoteFriendly: false,
   location: '',
+  acceptedToS: false,
+  subscribedToNewsletter: false,
 };
 
 const isFormDataValid = (state) =>
   state.title.length >= 10 &&
   state.company.length > 0 &&
-  state.salary.length > 0;
+  state.salary.length > 0 &&
+  state.acceptedToS;
 
 export default class JobCreationForm extends React.Component {
   state = initialState;
@@ -103,6 +107,11 @@ export default class JobCreationForm extends React.Component {
           options={locationOptions}
           onChange={this.handleChange}
           value={this.state.location}
+        />
+        <ConsentInput
+          onChange={this.handleChange}
+          acceptedToS={this.state.acceptedToS}
+          subscribedToNewsletter={this.state.subscribedToNewsletter}
         />
         <button
           className="job-form__button"

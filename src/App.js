@@ -32,11 +32,9 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">
-            Understanding Lifecycle Methods by Example
+            Prop Drilling and State Lifting
           </h1>
         </header>
-        <ResizeDemo />
-        <Timer />
         <button onClick={this.toggleFormVisible}>
           {this.state.isFormVisible ?
             'Hide form' :
