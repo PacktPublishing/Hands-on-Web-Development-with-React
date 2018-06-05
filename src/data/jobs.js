@@ -1,5 +1,12 @@
 export default [
   {
+    id: '1faddb4b-12f0-41f8-1c2d-fa7ae01ffeb2',
+    company: 'Startup X',
+    title: 'Junior React Developer',
+    salary: undefined,
+    location: undefined,
+  },
+  {
     id: '1faddb4b-12f0-41f8-1c2d-fa7ae01ffeb1',
     company: 'Startup X',
     title: 'Junior React Developer',

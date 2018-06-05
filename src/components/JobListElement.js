@@ -52,3 +52,8 @@ export default class JobListElement extends Component {
     );
   }
 }
+
+JobListElement.defaultProps = {
+  location: 'Not specified',
+  salary: 'Not given',
+};

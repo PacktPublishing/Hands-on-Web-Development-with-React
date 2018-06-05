@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import List from './components/List';
-import JobItem from './components/JobListElement';
+import JobList from './components/JobList';
 import JobCreationForm from './components/JobCreationForm';
-import Timer from './components/Timer';
-import ResizeDemo from './components/ResizeDemo';
 
 import JobsAPI from './api/JobsAPI';
 
@@ -32,7 +29,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">
-            Prop Drilling and State Lifting
+            Prop Checking with PropTypes
           </h1>
         </header>
         <button onClick={this.toggleFormVisible}>
@@ -44,7 +41,7 @@ class App extends Component {
         <div style={{ display: this.state.isFormVisible ? 'block' : 'none' }}>
           <JobCreationForm/>
         </div>
-        <List items={this.state.jobs} itemElement={JobItem} />
+        <JobList jobs={this.state.jobs} />
       </div>
     );
   }
