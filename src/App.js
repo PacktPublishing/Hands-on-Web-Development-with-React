@@ -29,7 +29,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">
-            Prop Checking with PropTypes
+            Functional (Stateless) Components
           </h1>
         </header>
         <button onClick={this.toggleFormVisible}>
