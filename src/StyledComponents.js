@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Navigation from './components/Navigation';
+import { bounce, jello, shake } from 'react-animations';
 
 const Body = styled.div`
   padding: 20px;
@@ -66,14 +67,34 @@ const Item = styled.div`
   flex: ${props => props.flex || 1};
 `;
 
+const rotate360 = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const RotatingAnimation = styled.div`
+  animation: ${rotate360} 2s linear infinite;
+`;
+
+const bounceAnimation = keyframes`${bounce}`;
+
+const Bounce = styled.div`
+  animation: 1s ${bounceAnimation};
+`;
+
 export default () =>
   <Body>
     <Navigation />
     <Heading>
-      Title!
+      Animations!
     </Heading>
     <Paragraph>
-      This is a paragraph of text.
+      Let’s make some!
     </Paragraph>
     <PrimaryButton>
       Sign Up!
@@ -81,6 +102,10 @@ export default () =>
     <SubtleButton>
       Learn more
     </SubtleButton>
+    {/*<RotatingAnimation>*/}
+      {/*[Rotation!]*/}
+    {/*</RotatingAnimation>*/}
+    <Bounce>
     <Box>
       <Item />
       <Item flex={3} />
@@ -88,4 +113,5 @@ export default () =>
       <Item flex={3} />
       <Item />
     </Box>
+    </Bounce>
   </Body>
