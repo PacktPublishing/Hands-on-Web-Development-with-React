@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Navigation from './components/Navigation';
 
 const Body = styled.div`
   padding: 20px;
@@ -52,8 +53,22 @@ const SubtleButton = styled(Button)`
   }
 `;
 
+const Box = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Item = styled.div`
+  padding: 12px;
+  margin: 12px;
+  height: 32px;
+  border: 1px solid blue;
+  flex: ${props => props.flex || 1};
+`;
+
 export default () =>
   <Body>
+    <Navigation />
     <Heading>
       Title!
     </Heading>
@@ -66,4 +81,11 @@ export default () =>
     <SubtleButton>
       Learn more
     </SubtleButton>
+    <Box>
+      <Item />
+      <Item flex={3} />
+      <Item flex={3} />
+      <Item flex={3} />
+      <Item />
+    </Box>
   </Body>
