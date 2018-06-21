@@ -15,6 +15,7 @@ const NavigationItem = styled.li`
     `flex-grow: ${props.grow}` : 
     '' 
   };
+  color: ${props => props.theme.colors.primary};
 `;
 
 const Input = styled.input`

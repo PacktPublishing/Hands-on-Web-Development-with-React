@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { ThemeProvider } from 'styled-components';
 import './App.css';
 import JobList from './components/JobList';
+import Navigation from './components/Navigation';
 import JobCreationForm from './components/JobCreationForm';
-
+import { SubtleButton } from './components/Button';
 import JobsAPI from './api/JobsAPI';
+import theme from './theme';
 
 class App extends Component {
   state = {
@@ -26,23 +29,26 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">
-            Getting Started with Styled Components
-          </h1>
-        </header>
-        <button onClick={this.toggleFormVisible}>
-          {this.state.isFormVisible ?
-            'Hide form' :
-            'Show form'
-          }
-        </button>
-        <div style={{ display: this.state.isFormVisible ? 'block' : 'none' }}>
-          <JobCreationForm/>
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <header className="App-header">
+            <h1 className="App-title">
+              Styled Components & Themes!
+            </h1>
+          </header>
+          <Navigation />
+          <SubtleButton onClick={this.toggleFormVisible}>
+            {this.state.isFormVisible ?
+              'Hide form' :
+              'Show form'
+            }
+          </SubtleButton>
+          <div style={{ display: this.state.isFormVisible ? 'block' : 'none' }}>
+            <JobCreationForm/>
+          </div>
+          <JobList jobs={this.state.jobs} />
         </div>
-        <JobList jobs={this.state.jobs} />
-      </div>
+      </ThemeProvider>
     );
   }
 }

@@ -10,11 +10,6 @@
   padding: 4px 8px;
 }
 
-.job-form__button:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
 .job-form__error-label {
   color: crimson;
 }

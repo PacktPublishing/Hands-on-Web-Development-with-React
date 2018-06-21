@@ -91,10 +91,10 @@ export default () =>
   <Body>
     <Navigation />
     <Heading>
-      Animations!
+      Themes!
     </Heading>
     <Paragraph>
-      Let’s make some!
+      How do we reuse our constants? 🤔
     </Paragraph>
     <PrimaryButton>
       Sign Up!

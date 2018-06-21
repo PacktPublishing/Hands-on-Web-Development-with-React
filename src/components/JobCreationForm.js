@@ -3,6 +3,7 @@ import TextInputField from './form-elements/TextInputField';
 import CheckboxField from './form-elements/CheckboxField';
 import SelectField from './form-elements/SelectField';
 import ConsentInput from './form-elements/ConsentInput';
+import { PrimaryButton } from './Button';
 import './JobCreationForm.css';
 
 const locationOptions = [
@@ -113,12 +114,9 @@ export default class JobCreationForm extends React.Component {
           acceptedToS={this.state.acceptedToS}
           subscribedToNewsletter={this.state.subscribedToNewsletter}
         />
-        <button
-          className="job-form__button"
-          disabled={!enabled}
-        >
+        <PrimaryButton disabled={!enabled}>
           Submit Job
-        </button>
+        </PrimaryButton>
       </form>
     );
   }
