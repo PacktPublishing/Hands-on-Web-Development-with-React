@@ -29,7 +29,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">
-            Functional (Stateless) Components
+            Getting Started with Styled Components
           </h1>
         </header>
         <button onClick={this.toggleFormVisible}>
