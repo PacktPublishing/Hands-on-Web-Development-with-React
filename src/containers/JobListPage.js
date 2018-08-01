@@ -10,7 +10,7 @@ export default class JobListPage extends React.Component {
 
   componentDidMount = async () => {
     this.setState({ loading: true });
-    const jobs = await JobsAPI.getJobs();
+    const jobs = await JobsAPI.getJobsMocked();
     this.setState({ jobs, loading: false });
   };
 

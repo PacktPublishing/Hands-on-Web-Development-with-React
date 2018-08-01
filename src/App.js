@@ -20,7 +20,7 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <h1 className="App-title">
-              Routing With React Router
+              Working With an API
             </h1>
           </header>
           <Router>
