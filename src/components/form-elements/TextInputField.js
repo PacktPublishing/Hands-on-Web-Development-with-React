@@ -11,6 +11,7 @@ export default class TextInputField extends React.Component {
       value,
       required,
       onBlur,
+      type = 'text',
     } = this.props;
     return (
       <div className="input-field">
@@ -24,7 +25,7 @@ export default class TextInputField extends React.Component {
           id={name}
           name={name}
           value={value}
-          type="text"
+          type={type}
           className="input-field__text-input"
           required={required}
           onChange={onChange}
@@ -38,6 +39,7 @@ export default class TextInputField extends React.Component {
 TextInputField.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  type: PropTypes.string,
   value: PropTypes.string,
   required: PropTypes.bool,
   onChange: PropTypes.func.isRequired,

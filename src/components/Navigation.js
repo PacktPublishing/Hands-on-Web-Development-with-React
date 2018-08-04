@@ -28,20 +28,22 @@ const Input = styled.input`
   font-size: 14px;
 `;
 
-export default () =>
+export default ({ isLoggedIn }) =>
   <nav>
     <NavigationList>
       <NavigationItem>
         <Link to="/">Home</Link>
       </NavigationItem>
-      <NavigationItem>
-        <Link to="/add-job">Add Job</Link>
-      </NavigationItem>
+      {isLoggedIn &&
+        <NavigationItem>
+          <Link to="/add-job">Add Job</Link>
+        </NavigationItem>}
       <NavigationItem grow={3}>
         <Input type="text" placeholder="Search for Jobs" />
-      </NavigationItem >
-      <NavigationItem>
-        <Link to="/login">Login</Link>
       </NavigationItem>
+      {!isLoggedIn &&
+        <NavigationItem>
+          <Link to="/login">Login</Link>
+        </NavigationItem>}
     </NavigationList>
   </nav>;

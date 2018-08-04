@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
   Route,
   Switch,
+  withRouter,
+  Redirect,
 } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import './App.css';
@@ -10,6 +11,7 @@ import Navigation from './components/Navigation';
 import theme from './theme';
 import JobListPage from './containers/JobListPage';
 import CreateJobPage from './containers/CreateJobPage';
+import LoginPage from './containers/LoginPage';
 
 const NotFound = () => <div>404 Page</div>;
 
@@ -19,7 +21,15 @@ const Page = styled.div`
 `;
 
 class App extends Component {
+  state = { user: undefined };
+
+  onLogin = (user) => {
+    this.setState({ user });
+    this.props.history.push('/');
+  };
+
   render() {
+    const isLoggedIn = this.state.user && this.state.user.sessionToken;
     return (
       <ThemeProvider theme={theme}>
         <div className="App">
@@ -28,22 +38,33 @@ class App extends Component {
               Working With an API
             </h1>
           </header>
-          <Router>
-            <Fragment>
-              <Navigation />
-              <Page>
-                <Switch>
-                  <Route exact path="/" component={JobListPage} />
-                  <Route exact path="/add-job" component={CreateJobPage} />
-                  <Route component={NotFound} />
-                </Switch>
-              </Page>
-            </Fragment>
-          </Router>
+          <Navigation isLoggedIn={isLoggedIn} />
+          <Page>
+            <Switch>
+              <Route exact path="/" component={JobListPage} />
+              <Route
+                exact
+                path="/add-job"
+                component={() =>
+                  isLoggedIn ?
+                    <CreateJobPage />:
+                    <Redirect to={'/login'} />
+                }
+              />
+              <Route
+                exact
+                path="/login"
+                component={() => isLoggedIn ?
+                  <Redirect to={'/'}/> :
+                  <LoginPage onLogin={this.onLogin} />}
+              />
+              <Route component={NotFound} />
+            </Switch>
+          </Page>
         </div>
       </ThemeProvider>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
