@@ -7,7 +7,7 @@ const NavigationList = styled.ul`
   flex-direction: row;
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 12px;
 `;
 
 const NavigationItem = styled.li`

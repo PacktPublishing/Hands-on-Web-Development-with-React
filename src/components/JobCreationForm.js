@@ -50,9 +50,8 @@ export default class JobCreationForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.onSubmit(this.state);
   };
-
 
   handleBlur = (e) => {
     const { name } = e.target;
@@ -114,7 +113,7 @@ export default class JobCreationForm extends React.Component {
           acceptedToS={this.state.acceptedToS}
           subscribedToNewsletter={this.state.subscribedToNewsletter}
         />
-        <PrimaryButton disabled={!enabled}>
+        <PrimaryButton disabled={!enabled || this.props.isSubmitting}>
           Submit Job
         </PrimaryButton>
       </form>

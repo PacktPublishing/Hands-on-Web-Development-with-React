@@ -7,6 +7,7 @@ const Button = styled.button`
   border: none;
   transition: 160ms all;
   cursor: pointer;
+  font-size: 16px;
   :disabled {
     cursor: not-allowed;
     opacity: 0.5;

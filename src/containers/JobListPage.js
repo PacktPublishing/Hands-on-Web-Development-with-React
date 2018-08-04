@@ -1,5 +1,6 @@
 import React from 'react';
 import JobList from '../components/JobList';
+import SubtleErrorBox from '../components/SubtleErrorBox';
 import JobsAPI from '../api/JobsAPI';
 
 export default class JobListPage extends React.Component {
@@ -10,11 +11,27 @@ export default class JobListPage extends React.Component {
 
   componentDidMount = async () => {
     this.setState({ loading: true });
-    const jobs = await JobsAPI.getJobsMocked();
-    this.setState({ jobs, loading: false });
+    const { success, response, error } = await JobsAPI.getJobsMocked();
+    if (success) {
+      this.setState({
+        jobs: response.data,
+        loading: false,
+        error: undefined,
+      });
+    } else {
+      this.setState({
+        error,
+        loading: false,
+      });
+    }
   };
 
   render() {
+    if (this.state.error) {
+      return (
+        <SubtleErrorBox label={this.state.error} />
+      );
+    }
     return (
       <JobList jobs={this.state.jobs} />
     );
