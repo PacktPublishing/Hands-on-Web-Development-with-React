@@ -15,5 +15,15 @@ export default {
       success: false,
       error: 'Username or password is incorrect. Please try again!',
     }), 1)
-  )
+  ),
+  checkSessionTokenMocked: () => new Promise(resolve =>
+    setTimeout(() => resolve({
+      success: true,
+    }), 1)
+  ),
+  checkSessionTokenMockedError: () => new Promise(resolve =>
+    setTimeout(() => resolve({
+      success: false,
+    }), 1)
+  ),
 };

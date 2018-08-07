@@ -12,6 +12,8 @@ import theme from './theme';
 import JobListPage from './containers/JobListPage';
 import CreateJobPage from './containers/CreateJobPage';
 import LoginPage from './containers/LoginPage';
+import localStorage from 'store2';
+import AuthAPI from './api/AuthAPI';
 
 const NotFound = () => <div>404 Page</div>;
 
@@ -23,8 +25,28 @@ const Page = styled.div`
 class App extends Component {
   state = { user: undefined };
 
+  componentDidMount = async () => {
+    const user = localStorage.get('user');
+    if (user && user.sessionToken) {
+      const { success } = await AuthAPI.checkSessionTokenMocked(user.sessionToken);
+      if (success) {
+        this.setState({ user });
+      } else {
+        localStorage.remove('user');
+      }
+    }
+  };
+
   onLogin = (user) => {
+    localStorage.set('user', user);
     this.setState({ user });
+    this.props.history.push('/');
+  };
+
+  handleLogout = (e) => {
+    e.preventDefault();
+    localStorage.remove('user');
+    this.setState({ user: undefined });
     this.props.history.push('/');
   };
 
@@ -38,7 +60,7 @@ class App extends Component {
               Working With an API
             </h1>
           </header>
-          <Navigation isLoggedIn={isLoggedIn} />
+          <Navigation isLoggedIn={isLoggedIn} onLogout={this.handleLogout} />
           <Page>
             <Switch>
               <Route exact path="/" component={JobListPage} />

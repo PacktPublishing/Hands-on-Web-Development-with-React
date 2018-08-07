@@ -28,7 +28,7 @@ const Input = styled.input`
   font-size: 14px;
 `;
 
-export default ({ isLoggedIn }) =>
+export default ({ isLoggedIn, onLogout }) =>
   <nav>
     <NavigationList>
       <NavigationItem>
@@ -41,9 +41,13 @@ export default ({ isLoggedIn }) =>
       <NavigationItem grow={3}>
         <Input type="text" placeholder="Search for Jobs" />
       </NavigationItem>
-      {!isLoggedIn &&
+      {isLoggedIn ?
+        <NavigationItem>
+          <Link to="/" onClick={onLogout}>Log out</Link>
+        </NavigationItem> :
         <NavigationItem>
           <Link to="/login">Login</Link>
-        </NavigationItem>}
+        </NavigationItem>
+      }
     </NavigationList>
   </nav>;
