@@ -8,9 +8,13 @@ import {
 import styled, { ThemeProvider } from 'styled-components';
 import './App.css';
 import Navigation from './components/Navigation';
+import Footer from './components/Footer';
 import theme from './theme';
 import JobListPage from './containers/JobListPage';
 import CreateJobPage from './containers/CreateJobPage';
+import JobPage from './containers/JobPage';
+import ToS from './containers/ToS';
+import PrivacyPolicy from './containers/PrivacyPolicy';
 import LoginPage from './containers/LoginPage';
 import localStorage from 'store2';
 import AuthAPI from './api/AuthAPI';
@@ -20,6 +24,7 @@ const NotFound = () => <div>404 Page</div>;
 const Page = styled.div`
   max-width: 75%;
   margin: 0 auto;
+  min-height: 70vh;
 `;
 
 class App extends Component {
@@ -50,6 +55,11 @@ class App extends Component {
     this.props.history.push('/');
   };
 
+  handleSearch = (e) => {
+    const { value } = e.target;
+    this.props.history.push(value ? `/?search=${value}` : '/');
+  };
+
   render() {
     const isLoggedIn = this.state.user && this.state.user.sessionToken;
     return (
@@ -57,13 +67,18 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <h1 className="App-title">
-              Working With an API
+              Adding Public Content
             </h1>
           </header>
-          <Navigation isLoggedIn={isLoggedIn} onLogout={this.handleLogout} />
+          <Navigation
+            isLoggedIn={isLoggedIn}
+            onLogout={this.handleLogout}
+            onSearch={this.handleSearch}
+          />
           <Page>
             <Switch>
               <Route exact path="/" component={JobListPage} />
+              <Route exact path="/job/:slug" component={JobPage} />
               <Route
                 exact
                 path="/add-job"
@@ -80,9 +95,12 @@ class App extends Component {
                   <Redirect to={'/'}/> :
                   <LoginPage onLogin={this.onLogin} />}
               />
+              <Route exact path="/terms-of-service" component={ToS} />
+              <Route exact path="/privacy-policy" component={PrivacyPolicy} />
               <Route component={NotFound} />
             </Switch>
           </Page>
+          <Footer />
         </div>
       </ThemeProvider>
     );

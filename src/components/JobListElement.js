@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './JobListElement.css';
 
 export const JobListElementMetaItem = ({
@@ -25,8 +26,8 @@ export const JobListElementMeta = ({ company, location, salary }) =>
     />
   </p>;
 
-const JobListElement = ({ title, company, location, salary }) =>
-  <a href="#" className="job-item">
+const JobListElement = ({ title, company, location, salary, slug }) =>
+  <Link to={`/job/${slug}`} className="job-item">
     <div>
       <h2 className="job-item_title">
         {title}
@@ -37,7 +38,7 @@ const JobListElement = ({ title, company, location, salary }) =>
         salary={salary}
       />
     </div>
-  </a>;
+  </Link>;
 
 JobListElement.defaultProps = {
   location: 'Not specified',

@@ -8,13 +8,13 @@ export default {
           sessionToken: 'pf2oi86edebfc8zffedfi5xb9m2e028baneb4uldb6e2af0ye8acbe8ag68f60z28ffeag0t0'
         }
       },
-    }), 1)
+    }), 2000)
   ),
   loginMockedError: () => new Promise(resolve =>
     setTimeout(() => resolve({
       success: false,
       error: 'Username or password is incorrect. Please try again!',
-    }), 1)
+    }), 2000)
   ),
   checkSessionTokenMocked: () => new Promise(resolve =>
     setTimeout(() => resolve({

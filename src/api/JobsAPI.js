@@ -2,11 +2,17 @@ import jobs from '../data/jobs';
 import NetworkService from './NetworkService';
 
 export default {
-  getJobsMocked: () => new Promise(resolve =>
+  getJobsMocked: (searchQuery) => new Promise(resolve =>
     setTimeout(() => resolve({
       success: true,
-      response: { data: jobs },
-    }), 1)
+      response: {
+        data: jobs.filter((job) =>
+          searchQuery ?
+            job.title.toLowerCase().indexOf(searchQuery.toLowerCase()) >= 0 :
+            true
+        ),
+      },
+    }), 1000)
   ),
   getJobsMockedError: () => new Promise(resolve =>
     setTimeout(() => resolve({
@@ -14,6 +20,16 @@ export default {
       error: 'There was an error loading job offers. Please try again later!',
     }), 1)
   ),
+  getJobMocked: (slug) => new Promise(resolve => {
+    const job = jobs.find((job) => job.slug === slug);
+    setTimeout(() => resolve({
+      success: job !== undefined,
+      response: { data: job },
+      error: job === undefined ?
+        'The requested job offer does not exist or has expired.' :
+        undefined,
+    }), 1000)
+  }),
   getJobs: async () => {
     return await NetworkService.get('/jobs');
   },

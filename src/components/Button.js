@@ -14,7 +14,7 @@ const Button = styled.button`
   }  
 `;
 
-export const PrimaryButton = styled(Button)`
+export const PrimaryButton = Button.extend`
   background-color: ${props => props.theme.colors.primary};
   color: #fff;
   :hover {
@@ -22,7 +22,7 @@ export const PrimaryButton = styled(Button)`
   }
 `;
 
-export const SubtleButton = styled(Button)`
+export const SubtleButton = Button.extend`
   color: ${props => props.theme.colors.primary};
   :hover {
     color: ${props => props.theme.colors.secondary};

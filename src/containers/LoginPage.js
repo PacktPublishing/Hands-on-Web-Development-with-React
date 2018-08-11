@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import SubtleErrorBox from '../components/SubtleErrorBox';
 import { PrimaryButton } from '../components/Button'
 import TextInputField from '../components/form-elements/TextInputField';
+import Spinner from '../components/Spinner';
 import AuthAPI from '../api/AuthAPI';
 
 const LoginForm = styled.form`
@@ -57,9 +58,10 @@ export default class LoginPage extends React.Component {
           type="password"
           value={this.state.password}
         />
-        <PrimaryButton>
+        <PrimaryButton disabled={this.state.loading}>
           Login
         </PrimaryButton>
+        {this.state.loading && <Spinner />}
         {this.state.error &&
           <SubtleErrorBox label={this.state.error} />
         }

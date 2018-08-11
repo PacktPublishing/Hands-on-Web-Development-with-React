@@ -18,6 +18,7 @@ export default class JobList extends Component {
 JobList.propTypes = {
   jobs: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
     company: PropTypes.string,
     location: PropTypes.string,
     salary: PropTypes.string,
