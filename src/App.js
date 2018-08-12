@@ -16,8 +16,11 @@ import JobPage from './containers/JobPage';
 import ToS from './containers/ToS';
 import PrivacyPolicy from './containers/PrivacyPolicy';
 import LoginPage from './containers/LoginPage';
+import JobsManagementPage from './containers/JobsManagementPage';
 import localStorage from 'store2';
 import AuthAPI from './api/AuthAPI';
+import UserRole from './enums/UserRole';
+import AdminDashboard from './containers/AdminDashboard';
 
 const NotFound = () => <div>404 Page</div>;
 
@@ -45,7 +48,11 @@ class App extends Component {
   onLogin = (user) => {
     localStorage.set('user', user);
     this.setState({ user });
-    this.props.history.push('/');
+    if (user.role === UserRole.ADMIN) {
+      this.props.history.push('/dashboard');
+    } else {
+      this.props.history.push('/manage');
+    }
   };
 
   handleLogout = (e) => {
@@ -61,17 +68,19 @@ class App extends Component {
   };
 
   render() {
-    const isLoggedIn = this.state.user && this.state.user.sessionToken;
+    const userRole = this.state.user ? this.state.user.role : UserRole.ANONYMOUS;
+    const isLoggedIn = this.state.user && this.state.user.sessionToken && userRole > UserRole.ANONYMOUS;
+
     return (
       <ThemeProvider theme={theme}>
         <div className="App">
           <header className="App-header">
             <h1 className="App-title">
-              Adding Public Content
+              Handling Different User Roles in Our System
             </h1>
           </header>
           <Navigation
-            isLoggedIn={isLoggedIn}
+            userRole={userRole}
             onLogout={this.handleLogout}
             onSearch={this.handleSearch}
           />
@@ -94,6 +103,25 @@ class App extends Component {
                 component={() => isLoggedIn ?
                   <Redirect to={'/'}/> :
                   <LoginPage onLogin={this.onLogin} />}
+              />
+              <Route
+                exact
+                path="/manage"
+                component={() => isLoggedIn ?
+                  <JobsManagementPage
+                    userId={this.state.user.id}
+                    userRole={userRole}
+                  /> :
+                  <Redirect to={'/'}/>
+                  }
+              />
+              <Route
+                exact
+                path="/dashboard"
+                component={() => isLoggedIn && userRole === UserRole.ADMIN ?
+                  <AdminDashboard /> :
+                  <Redirect to={'/'}/>
+                }
               />
               <Route exact path="/terms-of-service" component={ToS} />
               <Route exact path="/privacy-policy" component={PrivacyPolicy} />

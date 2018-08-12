@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import UserRole from '../enums/UserRole';
 
 const NavigationList = styled.ul`
   display: flex;
@@ -28,20 +29,28 @@ const Input = styled.input`
   font-size: 14px;
 `;
 
-export default ({ isLoggedIn, onLogout, onSearch }) =>
+export default ({ userRole, onLogout, onSearch }) =>
   <nav>
     <NavigationList>
       <NavigationItem>
         <Link to="/">Home</Link>
       </NavigationItem>
-      {isLoggedIn &&
+      {userRole > UserRole.ANONYMOUS &&
         <NavigationItem>
           <Link to="/add-job">Add Job</Link>
+        </NavigationItem>}
+      {userRole > UserRole.ANONYMOUS &&
+        <NavigationItem>
+          <Link to="/manage">Posted Jobs</Link>
+        </NavigationItem>}
+      {userRole === UserRole.ADMIN &&
+        <NavigationItem>
+          <Link to="/dashboard">Dashboard</Link>
         </NavigationItem>}
       <NavigationItem grow={3}>
         <Input onChange={onSearch} type="text" placeholder="Search for Jobs" />
       </NavigationItem>
-      {isLoggedIn ?
+      {userRole > UserRole.ANONYMOUS ?
         <NavigationItem>
           <Link to="/" onClick={onLogout}>Log out</Link>
         </NavigationItem> :

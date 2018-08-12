@@ -10,6 +10,7 @@ export default class CreateJobPage extends React.Component {
   };
 
   handleSubmit = async (job) => {
+    this.setState({ loading: true });
     const { success, response, error } = await JobsAPI.addJobMocked(job);
     if (success) {
       this.setState({
@@ -45,7 +46,7 @@ export default class CreateJobPage extends React.Component {
           </div> :
           <JobCreationForm
             onSubmit={this.handleSubmit}
-            isSubmitting={this.loading}
+            isSubmitting={this.state.loading}
           />
         }
         {this.state.error && <SubtleErrorBox label={this.state.error} />}

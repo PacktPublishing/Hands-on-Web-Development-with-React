@@ -5,6 +5,7 @@ import SelectField from './form-elements/SelectField';
 import ConsentInput from './form-elements/ConsentInput';
 import { PrimaryButton } from './Button';
 import './JobCreationForm.css';
+import Spinner from './Spinner';
 
 const locationOptions = [
   {value: '', label: 'Blank' },
@@ -116,6 +117,9 @@ export default class JobCreationForm extends React.Component {
         <PrimaryButton disabled={!enabled || this.props.isSubmitting}>
           Submit Job
         </PrimaryButton>
+        {this.props.isSubmitting &&
+          <Spinner />
+        }
       </form>
     );
   }
