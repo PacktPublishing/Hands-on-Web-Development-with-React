@@ -76,11 +76,6 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <div className="App">
-          <header className="App-header">
-            <h1 className="App-title">
-              Working with Third Party Libraries
-            </h1>
-          </header>
           <Navigation
             userRole={userRole}
             onLogout={this.handleLogout}
