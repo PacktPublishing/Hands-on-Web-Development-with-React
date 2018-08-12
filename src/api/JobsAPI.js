@@ -59,6 +59,12 @@ export default {
     setTimeout(() => resolve({
       success: false,
       error: 'The server is currently busy. Please try again!',
+    }), 1000)
+  ),
+  deleteJobMocked: () => new Promise(resolve =>
+    setTimeout(() => resolve({
+      success: true,
+      response: { data: { deleted: true } },
     }), 1)
   ),
 };

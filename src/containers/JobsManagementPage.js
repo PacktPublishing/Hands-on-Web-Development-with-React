@@ -45,6 +45,7 @@ export default class JobsManagementPage extends React.Component {
       <JobList
         jobs={this.state.jobs}
         withStats={true}
+        hasEditPermission={this.props.permissions.jobs.edit}
       />
     );
   }

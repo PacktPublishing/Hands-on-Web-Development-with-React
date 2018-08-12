@@ -5,8 +5,13 @@ import JobListElement from './JobListElement';
 
 export default class JobList extends Component {
   render() {
-    const { jobs, withStats } = this.props;
-    const jobItems = jobs.map(job => ({ ...job, withStats: withStats }));
+    const { jobs, withStats, hasEditPermission } = this.props;
+    const jobItems = jobs.map(job => ({
+      ...job,
+      withStats,
+      hasEditPermission,
+    }));
+
     return (
       <List
         items={jobItems}

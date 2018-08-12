@@ -17,6 +17,7 @@ import ToS from './containers/ToS';
 import PrivacyPolicy from './containers/PrivacyPolicy';
 import LoginPage from './containers/LoginPage';
 import JobsManagementPage from './containers/JobsManagementPage';
+import JobManagementPage from './containers/JobManagementPage';
 import localStorage from 'store2';
 import AuthAPI from './api/AuthAPI';
 import UserRole from './enums/UserRole';
@@ -69,6 +70,7 @@ class App extends Component {
 
   render() {
     const userRole = this.state.user ? this.state.user.role : UserRole.ANONYMOUS;
+    const permissions = this.state.user ? this.state.user.permissions : { jobs: {} };
     const isLoggedIn = this.state.user && this.state.user.sessionToken && userRole > UserRole.ANONYMOUS;
 
     return (
@@ -76,7 +78,7 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <h1 className="App-title">
-              Handling Different User Roles in Our System
+              Not Just Routes: Granular Feature Control!
             </h1>
           </header>
           <Navigation
@@ -111,9 +113,23 @@ class App extends Component {
                   <JobsManagementPage
                     userId={this.state.user.id}
                     userRole={userRole}
+                    permissions={permissions}
                   /> :
                   <Redirect to={'/'}/>
                   }
+              />
+              <Route
+                exact
+                path="/manage/:slug"
+                component={(props) => isLoggedIn && permissions.jobs.edit ?
+                  <JobManagementPage
+                    userId={this.state.user.id}
+                    userRole={userRole}
+                    permissions={permissions}
+                    match={props.match}
+                  /> :
+                  <Redirect to={'/'}/>
+                }
               />
               <Route
                 exact

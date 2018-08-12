@@ -42,8 +42,18 @@ export const JobListElementStats = ({ views, clicks }) =>
     />
   </p>;
 
-const JobListElement = ({ title, company, location, salary, slug, views, clicks, withStats }) =>
-  <Link to={`/job/${slug}`} className="job-item">
+const JobListElement = ({
+  title,
+  company,
+  location,
+  salary,
+  slug,
+  views,
+  clicks,
+  withStats,
+  hasEditPermission,
+}) =>
+  <Link to={hasEditPermission ? `/manage/${slug}` : `/job/${slug}`} className="job-item">
     <div>
       <h2 className="job-item_title">
         {title}
@@ -68,6 +78,7 @@ JobListElement.defaultProps = {
   views: 0,
   clicks: 0,
   withStats: false,
+  hasEditPermission: false,
 };
 
 export default JobListElement;

@@ -37,6 +37,16 @@ const isFormDataValid = (state) =>
 export default class JobCreationForm extends React.Component {
   state = initialState;
 
+  componentDidMount = () => {
+    if (this.props.defaultState) {
+      const defaultState = {};
+      Object.keys(initialState).forEach((key) => {
+        defaultState[key] = this.props.defaultState[key] || initialState[key];
+      });
+      this.setState(defaultState);
+    }
+  };
+
   handleChange = (e) => {
     const { type, name, value, checked } = e.target;
     if (type === 'checkbox') {
