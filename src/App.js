@@ -18,10 +18,10 @@ import PrivacyPolicy from './containers/PrivacyPolicy';
 import LoginPage from './containers/LoginPage';
 import JobsManagementPage from './containers/JobsManagementPage';
 import JobManagementPage from './containers/JobManagementPage';
-import localStorage from 'store2';
 import AuthAPI from './api/AuthAPI';
 import UserRole from './enums/UserRole';
 import AdminDashboard from './containers/AdminDashboard';
+import localStorage from './services/localStorage';
 
 const NotFound = () => <div>404 Page</div>;
 
@@ -78,7 +78,7 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <h1 className="App-title">
-              Not Just Routes: Granular Feature Control!
+              Working with Third Party Libraries
             </h1>
           </header>
           <Navigation
