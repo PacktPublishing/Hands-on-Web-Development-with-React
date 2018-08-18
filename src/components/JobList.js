@@ -1,22 +1,15 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import List from './List';
-import JobListElement from './JobListElement';
+import ListHoC from './List';
+import JobListElementHoC from './JobListElement';
 
 export default class JobList extends Component {
   render() {
     const { jobs, withStats, hasEditPermission } = this.props;
-    const jobItems = jobs.map(job => ({
-      ...job,
-      withStats,
-      hasEditPermission,
-    }));
-
+    const JobListElement = JobListElementHoC(withStats, hasEditPermission);
+    const List = ListHoC(JobListElement);
     return (
-      <List
-        items={jobItems}
-        itemElement={JobListElement}
-      />
+      <List items={jobs} />
     );
   }
 }

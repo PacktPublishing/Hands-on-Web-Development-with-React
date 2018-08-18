@@ -81,4 +81,12 @@ JobListElement.defaultProps = {
   hasEditPermission: false,
 };
 
-export default JobListElement;
+const JobListElementHoC = (withStats, hasEditPermission) =>
+  (props) =>
+    <JobListElement
+      withStats={withStats}
+      hasEditPermission={hasEditPermission}
+      {...props}
+    />;
+
+export default JobListElementHoC;

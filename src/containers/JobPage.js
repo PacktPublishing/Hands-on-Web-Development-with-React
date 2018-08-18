@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import JobsAPI from '../api/JobsAPI';
-import JobListElement from '../components/JobListElement';
+import JobListElementHoC from '../components/JobListElement';
 import ExternalLink from '../components/ExternalLink';
 import SubtleErrorBox from '../components/SubtleErrorBox';
 import Spinner from '../components/Spinner';
+
+const JobListElement = JobListElementHoC(false, false);
 
 const Background = styled.div`
   width: 100%;
