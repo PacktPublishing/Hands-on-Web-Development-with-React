@@ -6,6 +6,7 @@ import ConsentInput from './form-elements/ConsentInput';
 import { PrimaryButton } from './Button';
 import './JobCreationForm.css';
 import Spinner from './Spinner';
+import isFormDataValid from '../utils/jobCreationFormValidator';
 
 const locationOptions = [
   {value: '', label: 'Blank' },
@@ -27,12 +28,6 @@ const initialState = {
   acceptedToS: false,
   subscribedToNewsletter: false,
 };
-
-const isFormDataValid = (state) =>
-  state.title.length >= 10 &&
-  state.company.length > 0 &&
-  state.salary.length > 0 &&
-  state.acceptedToS;
 
 export default class JobCreationForm extends React.Component {
   state = initialState;
