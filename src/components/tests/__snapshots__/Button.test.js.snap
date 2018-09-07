@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button.js PrimaryButton renders correctly 1`] = `
+<button
+  className="sc-bwzfXH biIyjb"
+  onClick={[Function]}
+>
+  Hello!
+</button>
+`;
+
+exports[`Button.js SubtleButton renders correctly 1`] = `
+<button
+  className="sc-htpNat kKoBtB"
+  onClick={[Function]}
+>
+  SubtleButton!
+</button>
+`;
